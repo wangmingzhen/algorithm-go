@@ -1,0 +1,26 @@
+package main
+
+import (
+	"fmt"
+)
+
+// LinearSearch 线性查找函数
+func LinearSearch(arr []int, target int) int {
+	for i, value := range arr {
+		if value == target {
+			return i // 返回目标元素的索引
+		}
+	}
+	return -1 // 如果未找到目标元素，返回-1
+}
+
+func main() {
+	arr := []int{3, 5, 2, 7, 1, 8, 4} // 示例数组
+	target := 7                      // 要查找的目标元素
+	index := LinearSearch(arr, target)
+	if index != -1 {
+		fmt.Printf("元素 %d 在数组中的索引是 %d\n", target, index)
+	} else {
+		fmt.Printf("元素 %d 不在数组中\n", target)
+	}
+}
