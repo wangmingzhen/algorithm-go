@@ -24,3 +24,45 @@ func main() {
 		fmt.Printf("元素 %d 不在数组中\n", target)
 	}
 }
+
+/******泛型优化*******/
+
+
+package main
+
+import (
+	"fmt"
+)
+
+// LinearSearch 泛型线性查找函数
+// T 是类型参数，表示切片的元素类型
+func LinearSearch[T comparable](arr []T, target T) int {
+	for i, value := range arr {
+		if value == target {
+			return i // 返回目标元素的索引
+		}
+	}
+	return -1 // 如果未找到目标元素，返回-1
+}
+
+func main() {
+	// 示例1：整数切片
+	intSlice := []int{3, 5, 2, 7, 1, 8, 4}
+	intTarget := 7
+	intIndex := LinearSearch(intSlice, intTarget)
+	if intIndex != -1 {
+		fmt.Printf("元素 %d 在整数切片中的索引是 %d\n", intTarget, intIndex)
+	} else {
+		fmt.Printf("元素 %d 不在整数切片中\n", intTarget)
+	}
+
+	// 示例2：字符串切片
+	stringSlice := []string{"apple", "banana", "cherry", "date"}
+	stringTarget := "cherry"
+	stringIndex := LinearSearch(stringSlice, stringTarget)
+	if stringIndex != -1 {
+		fmt.Printf("元素 %s 在字符串切片中的索引是 %d\n", stringTarget, stringIndex)
+	} else {
+		fmt.Printf("元素 %s 不在字符串切片中\n", stringTarget)
+	}
+}
