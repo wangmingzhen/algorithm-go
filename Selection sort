@@ -1,0 +1,75 @@
+package main
+
+import (
+	"fmt"
+)
+
+// 选择排序函数 基本思想是：在每一轮中，从未排序的部分选择最小（或最大）的元素，将其放到已排序部分的末尾
+func selectionSort(arr []int) []int {
+	n := len(arr)
+	for i := 0; i < n-1; i++ { // 外层循环控制排序的轮数
+		minIndex := i // 假设当前轮次的最小值索引为 i
+		for j := i + 1; j < n; j++ { // 内层循环在未排序部分查找最小值
+			if arr[j] < arr[minIndex] {
+				minIndex = j // 更新最小值索引
+			}
+		}
+		// 将找到的最小值与当前轮次的第一个元素交换
+		if minIndex != i {
+			arr[i], arr[minIndex] = arr[minIndex], arr[i]
+		}
+	}
+	return arr
+}
+
+func main() {
+	arr := []int{64, 25, 12, 22, 11}
+	fmt.Println("原始数组:", arr)
+	sortedArr := selectionSort(arr)
+	fmt.Println("排序后的数组:", sortedArr)
+}
+
+//******************泛型选择排序******************
+
+package main
+
+import (
+	"fmt"
+	"sort"
+)
+
+// 定义一个泛型选择排序函数
+func SelectionSort[T sort.Ordered](arr []T) {
+	n := len(arr)
+	for i := 0; i < n-1; i++ {
+		minIndex := i
+		for j := i + 1; j < n; j++ {
+			if arr[j] < arr[minIndex] {
+				minIndex = j
+			}
+		}
+		if minIndex != i {
+			arr[i], arr[minIndex] = arr[minIndex], arr[i]
+		}
+	}
+}
+
+func main() {
+	// 测试整数排序
+	intArr := []int{64, 25, 12, 22, 11}
+	fmt.Println("原始整数数组:", intArr)
+	SelectionSort(intArr)
+	fmt.Println("排序后的整数数组:", intArr)
+
+	// 测试字符串排序
+	strArr := []string{"apple", "orange", "banana", "pear"}
+	fmt.Println("原始字符串数组:", strArr)
+	SelectionSort(strArr)
+	fmt.Println("排序后的字符串数组:", strArr)
+
+	// 测试浮点数排序
+	floatArr := []float64{3.14, 2.71, 1.61, 1.41}
+	fmt.Println("原始浮点数数组:", floatArr)
+	SelectionSort(floatArr)
+	fmt.Println("排序后的浮点数数组:", floatArr)
+}
