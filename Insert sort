@@ -1,0 +1,76 @@
+package main
+
+import (
+	"fmt"
+)
+
+// 插入排序函数
+func InsertionSort(arr []int) {
+	n := len(arr)
+	for i := 1; i < n; i++ {
+		key := arr[i] // 当前要插入的元素
+		j := i - 1
+
+		// 将大于 key 的元素向后移动一位
+		for j >= 0 && arr[j] > key {
+			arr[j+1] = arr[j]
+			j--
+		}
+		// 插入 key
+		arr[j+1] = key
+	}
+}
+
+func main() {
+	// 测试整数排序
+	intArr := []int{64, 25, 12, 22, 11}
+	fmt.Println("原始整数数组:", intArr)
+	InsertionSort(intArr)
+	fmt.Println("排序后的整数数组:", intArr)
+}
+
+//******************插入排序法  泛型************
+
+package main
+
+import (
+	"fmt"
+	"sort"
+)
+
+// 定义一个泛型插入排序函数
+func InsertionSort[T sort.Ordered](arr []T) {
+	n := len(arr)
+	for i := 1; i < n; i++ {
+		key := arr[i] // 当前要插入的元素
+		j := i - 1
+
+		// 将大于 key 的元素向后移动一位
+		for j >= 0 && arr[j] > key {
+			arr[j+1] = arr[j]
+			j--
+		}
+		// 插入 key
+		arr[j+1] = key
+	}
+}
+
+func main() {
+	// 测试整数排序
+	intArr := []int{64, 25, 12, 22, 11}
+	fmt.Println("原始整数数组:", intArr)
+	InsertionSort(intArr)
+	fmt.Println("排序后的整数数组:", intArr)
+
+	// 测试字符串排序
+	strArr := []string{"apple", "orange", "banana", "pear"}
+	fmt.Println("原始字符串数组:", strArr)
+	InsertionSort(strArr)
+	fmt.Println("排序后的字符串数组:", strArr)
+
+	// 测试浮点数排序
+	floatArr := []float64{3.14, 2.71, 1.61, 1.41}
+	fmt.Println("原始浮点数数组:", floatArr)
+	InsertionSort(floatArr)
+	fmt.Println("排序后的浮点数数组:", floatArr)
+}
